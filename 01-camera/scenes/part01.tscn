@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwljdik21usnb"]
+
+[ext_resource type="Script" path="res://camera.gd" id="1_4rihs"]
+[ext_resource type="Environment" uid="uid://c8c3php67l6no" path="res://env.tres" id="1_nckhp"]
+[ext_resource type="Material" uid="uid://b7j5oxgnrsrf1" path="res://mat_plane.tres" id="2_1wan0"]
+[ext_resource type="Material" uid="uid://bhpf8kge1w13i" path="res://mat_cube.tres" id="3_6j8j5"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kxf5v"]
+size = Vector2(10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1dtpy"]
+
+[node name="part01" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 5, 4.5, 5)
+projection = 1
+size = 10.0
+far = 100.0
+script = ExtResource("1_4rihs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_nckhp")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.34202, 0.574647, -0.743507, 0, 0.791223, 0.611527, 0.939693, -0.209155, 0.270614, 0, 0, 0)
+
+[node name="Plane" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_1wan0")
+mesh = SubResource("PlaneMesh_kxf5v")
+
+[node name="Cube" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("3_6j8j5")
+mesh = SubResource("BoxMesh_1dtpy")
