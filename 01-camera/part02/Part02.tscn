@@ -25,6 +25,7 @@ render_target_update_mode = 4
 transform = Transform3D(0.707107, -0.353553, 0.612372, 0, 0.866025, 0.5, -0.707107, -0.353553, 0.612372, 0, 0, 0)
 script = ExtResource("4_ke6sr")
 circular_radius = 0.5
+circular_speed = 0.1
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport/CameraRig"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, 20)
@@ -42,6 +43,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("6_kqdr2")
 viewport = NodePath("../SubViewport")
+sub_pixel_movement_at_integer_scale = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Display"]
 texture_filter = 2

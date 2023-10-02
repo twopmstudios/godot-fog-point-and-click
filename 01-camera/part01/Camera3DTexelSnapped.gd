@@ -12,7 +12,7 @@ func _process(_delta):
 	if global_rotation != _prev_rotation:
 		_prev_rotation = global_rotation
 		_snap_space = global_transform
-	var texel_size := size / 135.0
+	var texel_size := size / 180.0
 	# camera position in snap space
 	var snap_space_position := global_position * _snap_space
 	# snap!
