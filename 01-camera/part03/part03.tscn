@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://byv0qfl8uwfbl"]
 
-[ext_resource type="PackedScene" uid="uid://c7kjke7mmdjoa" path="res://common/world.tscn" id="1_1vvpi"]
+[ext_resource type="PackedScene" uid="uid://c7kjke7mmdjoa" path="res://part01/world.tscn" id="1_1vvpi"]
 [ext_resource type="Material" uid="uid://c7xavcy54jyrx" path="res://part03/mat_cube_moving.tres" id="2_80bph"]
-[ext_resource type="Script" path="res://common/camera_rig.gd" id="3_307vq"]
+[ext_resource type="Script" path="res://part01/camera_rig.gd" id="3_307vq"]
 [ext_resource type="Script" path="res://part03/camera_3d_texel_snapped3.gd" id="4_ckly1"]
 [ext_resource type="Script" path="res://part03/display2.gd" id="5_ygtb4"]
 [ext_resource type="Shader" path="res://part02/pixel_art_upscale.gdshader" id="6_nn2jk"]

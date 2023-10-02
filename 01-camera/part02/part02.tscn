@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dusboal27haub"]
 
-[ext_resource type="PackedScene" uid="uid://c7kjke7mmdjoa" path="res://common/world.tscn" id="1_ep64y"]
-[ext_resource type="Script" path="res://common/camera_rig.gd" id="2_chchu"]
+[ext_resource type="PackedScene" uid="uid://c7kjke7mmdjoa" path="res://part01/world.tscn" id="1_ep64y"]
+[ext_resource type="Script" path="res://part01/camera_rig.gd" id="2_chchu"]
 [ext_resource type="Script" path="res://part02/camera_3d_texel_snapped2.gd" id="3_vgh83"]
 [ext_resource type="Script" path="res://part02/display.gd" id="4_6ag5h"]
 [ext_resource type="Shader" path="res://part02/pixel_art_upscale.gdshader" id="5_flve1"]
