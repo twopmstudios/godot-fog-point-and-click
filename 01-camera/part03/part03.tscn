@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://byv0qfl8uwfbl"]
 
-[ext_resource type="PackedScene" uid="uid://c7kjke7mmdjoa" path="res://common/World.tscn" id="1_8rp4y"]
-[ext_resource type="Material" uid="uid://c7xavcy54jyrx" path="res://part03/mat_cube_moving.tres" id="2_kycnu"]
-[ext_resource type="Script" path="res://common/CameraRig.gd" id="3_1dgpm"]
-[ext_resource type="Script" path="res://part03/Camera3DTexelSnapped3.gd" id="4_4t1hc"]
-[ext_resource type="Script" path="res://part03/Display2.gd" id="6_hyjof"]
-[ext_resource type="Shader" path="res://part02/pixel_art_upscale.gdshader" id="7_box8o"]
+[ext_resource type="PackedScene" uid="uid://c7kjke7mmdjoa" path="res://common/world.tscn" id="1_1vvpi"]
+[ext_resource type="Material" uid="uid://c7xavcy54jyrx" path="res://part03/mat_cube_moving.tres" id="2_80bph"]
+[ext_resource type="Script" path="res://common/camera_rig.gd" id="3_307vq"]
+[ext_resource type="Script" path="res://part03/camera_3d_texel_snapped3.gd" id="4_ckly1"]
+[ext_resource type="Script" path="res://part03/display2.gd" id="5_ygtb4"]
+[ext_resource type="Shader" path="res://part02/pixel_art_upscale.gdshader" id="6_nn2jk"]
 
 [sub_resource type="GDScript" id="GDScript_yfqah"]
 script/source = "extends Node3D
@@ -20,14 +20,14 @@ func _physics_process(delta):
 [sub_resource type="BoxMesh" id="BoxMesh_drxdm"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oehph"]
-shader = ExtResource("7_box8o")
+shader = ExtResource("6_nn2jk")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_2gejb"]
 viewport_path = NodePath("SubViewport")
 
 [node name="Part03" type="Node3D"]
 
-[node name="World" parent="." instance=ExtResource("1_8rp4y")]
+[node name="World" parent="." instance=ExtResource("1_1vvpi")]
 
 [node name="Rotating" type="Node3D" parent="."]
 script = SubResource("GDScript_yfqah")
@@ -41,7 +41,7 @@ update_scale = false
 
 [node name="MovingCube" type="MeshInstance3D" parent="." groups=["snap"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.5)
-material_override = ExtResource("2_kycnu")
+material_override = ExtResource("2_80bph")
 mesh = SubResource("BoxMesh_drxdm")
 skeleton = NodePath("../Rotating")
 
@@ -52,7 +52,7 @@ render_target_update_mode = 4
 
 [node name="CameraRig" type="Node3D" parent="SubViewport"]
 transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612373, 0, 0, 0)
-script = ExtResource("3_1dgpm")
+script = ExtResource("3_307vq")
 circular_radius = 0.5
 circular_speed = 0.1
 
@@ -62,7 +62,7 @@ projection = 1
 current = true
 size = 10.0
 far = 100.0
-script = ExtResource("4_4t1hc")
+script = ExtResource("4_ckly1")
 
 [node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
 clip_contents = true
@@ -70,7 +70,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
-script = ExtResource("6_hyjof")
+script = ExtResource("5_ygtb4")
 viewport = NodePath("../SubViewport")
 sub_pixel_movement_at_integer_scale = true
 
