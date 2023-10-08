@@ -34,14 +34,15 @@ func _process(_delta):
 		# apply camera offset as to not affect the actual transform
 		h_offset = snap_error.x
 		v_offset = snap_error.y
-	# error in screen texels (will be used later)
-	texel_error = Vector2(snap_error.x, -snap_error.y) / _texel_size
-	_snap_objects.call_deferred()
+		# error in screen texels (will be used later)
+		texel_error = Vector2(snap_error.x, -snap_error.y) / _texel_size
+		if snap_objects:
+			_snap_objects.call_deferred()
+	else:
+		texel_error = Vector2.ZERO
 
 
 func _snap_objects():
-	if not snap_objects:
-		return
 	_snap_nodes = get_tree().get_nodes_in_group("snap")
 	_pre_snapped_positions.resize(_snap_nodes.size())
 	for i in _snap_nodes.size():
@@ -54,7 +55,6 @@ func _snap_objects():
 
 
 func _snap_objects_revert():
-	if not snap_objects:
-		return
 	for i in _snap_nodes.size():
 		(_snap_nodes[i] as Node3D).global_position = _pre_snapped_positions[i]
+	_snap_nodes.clear()

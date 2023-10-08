@@ -25,5 +25,7 @@ func _process(_delta):
 		# apply camera offset as to not affect the actual transform
 		h_offset = snap_error.x
 		v_offset = snap_error.y
-	# error in screen texels (will be used later)
-	texel_error = Vector2(snap_error.x, -snap_error.y) / texel_size
+		# error in screen texels (will be used later)
+		texel_error = Vector2(snap_error.x, -snap_error.y) / texel_size
+	else:
+		texel_error = Vector2.ZERO
