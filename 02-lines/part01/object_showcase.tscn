@@ -1,0 +1,151 @@
+[gd_scene load_steps=14 format=3 uid="uid://dp1p0t423xd2w"]
+
+[ext_resource type="Material" uid="uid://bfwlg1lwsat8r" path="res://part01/mat_lines.tres" id="1_u7n5l"]
+[ext_resource type="Script" path="res://part01/rotating.gd" id="2_fovmd"]
+[ext_resource type="PackedScene" uid="uid://bdj0n5ehld0j" path="res://part01/icosphere.glb" id="3_mtvnm"]
+[ext_resource type="PackedScene" uid="uid://d2deto37o3lf" path="res://part01/cylinder.glb" id="3_n16l5"]
+[ext_resource type="Script" path="res://part01/camera_rig.gd" id="4_02q0e"]
+[ext_resource type="Script" path="res://part01/camera_3d_texel_snapped.gd" id="5_iv603"]
+[ext_resource type="Script" path="res://part01/display.gd" id="6_dblm2"]
+[ext_resource type="Shader" path="res://part01/pixel_art_upscale.gdshader" id="7_ef7sr"]
+
+[sub_resource type="Environment" id="Environment_3d2lq"]
+background_energy_multiplier = 0.0
+tonemap_mode = 3
+
+[sub_resource type="BoxMesh" id="BoxMesh_1dtpy"]
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_klebb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oehph"]
+shader = ExtResource("7_ef7sr")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2gejb"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Part03" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_3d2lq")
+
+[node name="Cube1" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -4)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_1dtpy")
+skeleton = NodePath("../..")
+script = ExtResource("2_fovmd")
+speed = -45
+
+[node name="Cube2" type="MeshInstance3D" parent="World"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0, 0, -4)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_1dtpy")
+skeleton = NodePath("../..")
+script = ExtResource("2_fovmd")
+axis = Vector3(1, 0, 0)
+speed = -45
+
+[node name="Cube3" type="MeshInstance3D" parent="World"]
+transform = Transform3D(0.124027, -0.492027, -0.8617, -0.474022, 0.73353, -0.48707, 0.871735, 0.468874, -0.142254, 5, 0, -4)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_1dtpy")
+skeleton = NodePath("../..")
+script = ExtResource("2_fovmd")
+axis = Vector3(0, 0, 1)
+
+[node name="cylinder" parent="World" instance=ExtResource("3_n16l5")]
+transform = Transform3D(2.12132, 0, -2.12132, 0, 2, 0, 2.12132, 0, 2.12132, -5, 0, 4)
+script = ExtResource("2_fovmd")
+speed = -45
+
+[node name="Cylinder" parent="World/cylinder" index="0"]
+material_override = ExtResource("1_u7n5l")
+
+[node name="Icosphere" parent="World" instance=ExtResource("3_mtvnm")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 4)
+script = ExtResource("2_fovmd")
+axis = Vector3(0, 1, 0.5)
+speed = -45
+
+[node name="Icosphere_001" parent="World/Icosphere" index="0"]
+material_override = ExtResource("1_u7n5l")
+
+[node name="Boxes" type="Node3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 4)
+script = ExtResource("2_fovmd")
+speed = -45
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="World/Boxes"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_klebb")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="World/Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_klebb")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="World/Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 0)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_klebb")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="World/Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_klebb")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="World/Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.5)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_klebb")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="World/Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_klebb")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="World/Boxes"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+material_override = ExtResource("1_u7n5l")
+mesh = SubResource("BoxMesh_klebb")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(322, 182)
+render_target_update_mode = 4
+
+[node name="CameraRig" type="Node3D" parent="SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.866026, 0.5, 0, -0.5, 0.866026, 0, 0, 0)
+script = ExtResource("4_02q0e")
+circular_speed = 0.1
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, 20)
+projection = 1
+current = true
+size = 10.0
+far = 100.0
+script = ExtResource("5_iv603")
+
+[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("6_dblm2")
+viewport = NodePath("../SubViewport")
+sub_pixel_movement_at_integer_scale = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Display"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_oehph")
+texture = SubResource("ViewportTexture_2gejb")
+centered = false
+
+[editable path="World/cylinder"]
+[editable path="World/Icosphere"]

@@ -1,0 +1,97 @@
+[gd_scene load_steps=13 format=3 uid="uid://byv0qfl8uwfbl"]
+
+[ext_resource type="Environment" uid="uid://c8c3php67l6no" path="res://part01/env.tres" id="1_gpmss"]
+[ext_resource type="Material" uid="uid://b7j5oxgnrsrf1" path="res://part01/mat_plane.tres" id="2_qq61h"]
+[ext_resource type="Script" path="res://part01/camera_rig.gd" id="3_307vq"]
+[ext_resource type="Material" uid="uid://bfwlg1lwsat8r" path="res://part01/mat_lines.tres" id="3_xenyd"]
+[ext_resource type="Script" path="res://part01/camera_3d_texel_snapped.gd" id="4_ckly1"]
+[ext_resource type="Script" path="res://part01/display.gd" id="4_ydodo"]
+[ext_resource type="Shader" path="res://part01/pixel_art_upscale.gdshader" id="6_nn2jk"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_kxf5v"]
+size = Vector2(10, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_1dtpy"]
+
+[sub_resource type="GDScript" id="GDScript_cx20v"]
+script/source = "extends MeshInstance3D
+
+
+func _process(delta):
+	rotate_y(deg_to_rad(45) * delta)
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oehph"]
+shader = ExtResource("6_nn2jk")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_2gejb"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Part03" type="Node3D"]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("1_gpmss")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.34202, 0.574648, -0.743507, 0, 0.791223, 0.611527, 0.939693, -0.209154, 0.270614, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Plane" type="MeshInstance3D" parent="World"]
+material_override = ExtResource("2_qq61h")
+mesh = SubResource("PlaneMesh_kxf5v")
+skeleton = NodePath("../..")
+
+[node name="Cube" type="MeshInstance3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = ExtResource("3_xenyd")
+mesh = SubResource("BoxMesh_1dtpy")
+skeleton = NodePath("../..")
+
+[node name="Cube2" type="MeshInstance3D" parent="World"]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 2, 0.5, -2)
+material_override = ExtResource("3_xenyd")
+mesh = SubResource("BoxMesh_1dtpy")
+skeleton = NodePath("../..")
+script = SubResource("GDScript_cx20v")
+
+[node name="Cube3" type="MeshInstance3D" parent="World"]
+transform = Transform3D(0.965926, 0, -0.258819, 0, 1, 0, 0.258819, 0, 0.965926, -2, 0.5, 2)
+material_override = ExtResource("3_xenyd")
+mesh = SubResource("BoxMesh_1dtpy")
+skeleton = NodePath("../..")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+size = Vector2i(322, 182)
+render_target_update_mode = 4
+
+[node name="CameraRig" type="Node3D" parent="SubViewport"]
+transform = Transform3D(0.707107, -0.353553, 0.612373, 0, 0.866026, 0.5, -0.707107, -0.353553, 0.612373, 0, 0, 0)
+script = ExtResource("3_307vq")
+circular_speed = 0.1
+
+[node name="Camera3D" type="Camera3D" parent="SubViewport/CameraRig"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, 20)
+projection = 1
+current = true
+size = 10.0
+far = 100.0
+script = ExtResource("4_ckly1")
+
+[node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 0
+offset_right = 320.0
+offset_bottom = 180.0
+script = ExtResource("4_ydodo")
+viewport = NodePath("../SubViewport")
+sub_pixel_movement_at_integer_scale = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Display"]
+texture_filter = 2
+material = SubResource("ShaderMaterial_oehph")
+texture = SubResource("ViewportTexture_2gejb")
+centered = false
