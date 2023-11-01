@@ -9,12 +9,12 @@ var texel_error := Vector2.ZERO
 @onready var _snap_space := global_transform
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# rotation changes the snap space
 	if global_rotation != _prev_rotation:
 		_prev_rotation = global_rotation
 		_snap_space = global_transform
-	var texel_size := size / float(get_viewport().size.y)
+	var texel_size := size / float((get_viewport() as SubViewport).size.y)
 	# camera position in snap space
 	var snap_space_position := global_position * _snap_space
 	# snap!

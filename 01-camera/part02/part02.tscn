@@ -28,7 +28,7 @@ circular_radius = 0.5
 circular_speed = 0.1
 
 [node name="Camera3D" type="Camera3D" parent="SubViewport/CameraRig"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9.53674e-07, 20)
+transform = Transform3D(1, 0, 0, 0, 1, -6.25849e-07, 0, -2.98023e-08, 1, 0, 9.53674e-07, 20)
 projection = 1
 current = true
 size = 10.0
@@ -38,12 +38,13 @@ script = ExtResource("3_vgh83")
 [node name="Display" type="Control" parent="." node_paths=PackedStringArray("viewport")]
 clip_contents = true
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("4_6ag5h")
 viewport = NodePath("../SubViewport")
-sub_pixel_movement_at_integer_scale = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Display"]
 texture_filter = 2

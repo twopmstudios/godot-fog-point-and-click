@@ -7,14 +7,17 @@
 [ext_resource type="Script" path="res://part03/display2.gd" id="5_ygtb4"]
 [ext_resource type="Shader" path="res://part02/pixel_art_upscale.gdshader" id="6_nn2jk"]
 
-[sub_resource type="GDScript" id="GDScript_yfqah"]
+[sub_resource type="GDScript" id="GDScript_jtgt5"]
 script/source = "extends Node3D
 
-@export var speed: float = 5.0
+@export var speed: float = 45.0
 
 
-func _physics_process(delta):
+func _process(delta: float) -> void:
+	var cube := (get_child(0) as Node3D)
+	var rot := cube.global_rotation
 	rotate_y(deg_to_rad(speed) * delta)
+	cube.global_rotation = rot
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_drxdm"]
@@ -30,20 +33,13 @@ viewport_path = NodePath("SubViewport")
 [node name="World" parent="." instance=ExtResource("1_1vvpi")]
 
 [node name="Rotating" type="Node3D" parent="."]
-script = SubResource("GDScript_yfqah")
-speed = 45.0
+script = SubResource("GDScript_jtgt5")
 
-[node name="CubeMover" type="RemoteTransform3D" parent="Rotating"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.5)
-remote_path = NodePath("../../MovingCube")
-update_rotation = false
-update_scale = false
-
-[node name="MovingCube" type="MeshInstance3D" parent="." groups=["snap"]]
+[node name="MovingCube" type="MeshInstance3D" parent="Rotating" groups=["snap"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 2.5)
 material_override = ExtResource("2_80bph")
 mesh = SubResource("BoxMesh_drxdm")
-skeleton = NodePath("../Rotating")
+skeleton = NodePath("")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -68,11 +64,10 @@ script = ExtResource("4_ckly1")
 clip_contents = true
 layout_mode = 3
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 script = ExtResource("5_ygtb4")
 viewport = NodePath("../SubViewport")
-sub_pixel_movement_at_integer_scale = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Display"]
 texture_filter = 2

@@ -7,7 +7,7 @@ extends Camera3D
 @onready var _snap_space := global_transform
 
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	# rotation changes the snap space
 	if global_rotation != _prev_rotation:
 		_prev_rotation = global_rotation
