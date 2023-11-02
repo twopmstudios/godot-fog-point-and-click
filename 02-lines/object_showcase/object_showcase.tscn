@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=3 uid="uid://dp1p0t423xd2w"]
 
-[ext_resource type="Material" uid="uid://bfwlg1lwsat8r" path="res://part01/mat_lines.tres" id="1_u7n5l"]
-[ext_resource type="Script" path="res://part01/rotating.gd" id="2_fovmd"]
-[ext_resource type="PackedScene" uid="uid://bdj0n5ehld0j" path="res://part01/icosphere.glb" id="3_mtvnm"]
-[ext_resource type="PackedScene" uid="uid://d2deto37o3lf" path="res://part01/cylinder.glb" id="3_n16l5"]
-[ext_resource type="Script" path="res://part01/camera_rig.gd" id="4_02q0e"]
-[ext_resource type="Script" path="res://part01/camera_3d_texel_snapped.gd" id="5_iv603"]
-[ext_resource type="Script" path="res://part01/display.gd" id="6_dblm2"]
-[ext_resource type="Shader" path="res://part01/pixel_art_upscale.gdshader" id="7_ef7sr"]
+[ext_resource type="Material" uid="uid://bfwlg1lwsat8r" path="res://object_showcase/mat_lines.tres" id="1_u7n5l"]
+[ext_resource type="Script" path="res://object_showcase/rotating.gd" id="2_fovmd"]
+[ext_resource type="PackedScene" uid="uid://bdj0n5ehld0j" path="res://object_showcase/icosphere.glb" id="3_mtvnm"]
+[ext_resource type="PackedScene" uid="uid://d2deto37o3lf" path="res://object_showcase/cylinder.glb" id="3_n16l5"]
+[ext_resource type="Script" path="res://object_showcase/camera_rig.gd" id="4_02q0e"]
+[ext_resource type="Script" path="res://object_showcase/camera_3d_texel_snapped.gd" id="5_iv603"]
+[ext_resource type="Script" path="res://object_showcase/display.gd" id="6_dblm2"]
+[ext_resource type="Shader" path="res://object_showcase/pixel_art_upscale.gdshader" id="7_ef7sr"]
 
 [sub_resource type="Environment" id="Environment_3d2lq"]
 background_energy_multiplier = 0.0

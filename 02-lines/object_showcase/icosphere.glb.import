@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bdj0n5ehld0j"
-path="res://.godot/imported/icosphere.glb-166b751d78bf3c9e6a9bbf17f8584df5.scn"
+path="res://.godot/imported/icosphere.glb-5e3e9b81a4a1407a87a406cc49ea1882.scn"
 
 [deps]
 
-source_file="res://part01/icosphere.glb"
-dest_files=["res://.godot/imported/icosphere.glb-166b751d78bf3c9e6a9bbf17f8584df5.scn"]
+source_file="res://object_showcase/icosphere.glb"
+dest_files=["res://.godot/imported/icosphere.glb-5e3e9b81a4a1407a87a406cc49ea1882.scn"]
 
 [params]
 

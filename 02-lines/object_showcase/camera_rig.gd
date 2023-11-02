@@ -12,7 +12,7 @@ var _circ_angle: float = 0
 @onready var cam: Camera3D = $Camera3D
 
 
-func _physics_process(delta):
+func _process(delta: float) -> void:
 	# movement
 	var input_vec := Input.get_vector("cam_left", "cam_right", "cam_back", "cam_forward")
 	# basis without pitch, so pretty much the yaw; who rolls a camera??

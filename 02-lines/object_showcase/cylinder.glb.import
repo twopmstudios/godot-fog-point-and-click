@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d2deto37o3lf"
-path="res://.godot/imported/cylinder.glb-4e33d1195d6c5b8f887398b91cdd55a5.scn"
+path="res://.godot/imported/cylinder.glb-ad5b6ac375ecab911c5d3788d1f1687e.scn"
 
 [deps]
 
-source_file="res://part01/cylinder.glb"
-dest_files=["res://.godot/imported/cylinder.glb-4e33d1195d6c5b8f887398b91cdd55a5.scn"]
+source_file="res://object_showcase/cylinder.glb"
+dest_files=["res://.godot/imported/cylinder.glb-ad5b6ac375ecab911c5d3788d1f1687e.scn"]
 
 [params]
 
