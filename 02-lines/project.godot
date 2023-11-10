@@ -26,7 +26,6 @@ gdscript/warnings/unsafe_void_return=2
 
 window/size/viewport_width=2560
 window/size/viewport_height=1440
-window/vsync/vsync_mode=0
 window/size/always_on_top.editor=true
 
 [input]
