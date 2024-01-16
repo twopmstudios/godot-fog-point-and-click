@@ -15,7 +15,7 @@ uniform vec3 outline_color : source_color = vec3(0, 0, 1);
 uniform vec3 edge_color : source_color = vec3(1, 0, 0);
 
 group_uniforms outline;
-uniform float depth_threshold : hint_range(0.0, 1.0, 0.01) = 0.2;
+uniform float depth_threshold : hint_range(0.0, 1.0, 0.01) = 0.25;
 uniform float depth_normal_threshold : hint_range(0.0, 1.0, 0.01) = 0.5;
 uniform float depth_normal_threshold_scale = 2.0;
 
@@ -40,7 +40,6 @@ void fragment() {
 	
 	vec2 texel_size = 1.0 / VIEWPORT_SIZE;
 	
-	vec2 uv[9];
 	vec3 pos[9];
 	vec3 norm[9];
 	float edge[9];
@@ -49,13 +48,14 @@ void fragment() {
 	for (int i = 0; i < 9; i++) {
 		vec2 offset = vec2(ivec2(i%3 - 1, i/3 - 1));
 		// fragment uv + neighbour offset
-		uv[i] = SCREEN_UV + offset * texel_size;
+		vec2 uv = SCREEN_UV + offset * texel_size;
 		// fragment position in view space
-		pos[i] = view_from_screen(uv[i], depth_texture);
+		pos[i] = view_from_screen(uv, depth_texture);
 		// fragment normal in view space
-		norm[i] = texture(normal_roughness_texture, uv[i]).xyz * 2.0 - 1.0;
+		norm[i] = texture(normal_roughness_texture, uv).xyz * 2.0 - 1.0;
 	}
 	
+	// TODO: get depth_thresh (and concave_thresh?) code from other shader
 	// thresholding the view direction
 	// NOTE(david): in orthogonal projections, normal.z is equivalent to dot(normal, -view_forward)
 	float normal_diff = 1.0 - norm[4].z;
@@ -65,7 +65,8 @@ void fragment() {
 	float depth_thresh = depth_threshold * normal_threshold;
 	
 	// ===== convexity/concavity ===== //
-	// NOTE(david): there might a simpler way to do this, but hey it works
+	// NOTE(david): there might a simpler way to do this, but hey it works.
+	// slap the cross product into edge[i] and sum the concavity for later.
 	float concave = 0.0;
 	for (int i = 0; i < 9; i++) {
 		vec2 offset = vec2(ivec2(i%3 - 1, i/3 - 1));
@@ -78,13 +79,14 @@ void fragment() {
 	
 	// ===== edge ===== //
 	float is_edge = 0.0;
+	// loop over direct cardinal neighbouring texels
 	for (int i = 1; i <= 7; i+=2) {
 		float norm_bias = i < 4 ? 1e-5 : 0.0;
 		is_edge +=
 			// is this below the depth threshold
 			abs(pos[i].z - pos[4].z) < depth_thresh
 			// is the normal more oblique; less aligned with the camera (up/left takes priority when even)
-			&& norm[i].z + norm_bias >= norm[4].z
+			&& norm[i].z + norm_bias > norm[4].z
 			// is this a convex edge
 			&& edge[i] > convex_threshold
 			? 1.0 : 0.0;
