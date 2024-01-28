@@ -11,7 +11,6 @@ config_version=5
 [application]
 
 config/name="3d-pixel-art-in-godot-01-camera"
-config/project_settings_override="_res://part02/settings.cfg"
 config/features=PackedStringArray("4.2", "Forward Plus")
 
 [debug]

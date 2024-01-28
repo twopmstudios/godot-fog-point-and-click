@@ -1,5 +1,6 @@
-[gd_scene load_steps=8 format=3 uid="uid://dusboal27haub"]
+[gd_scene load_steps=9 format=3 uid="uid://dusboal27haub"]
 
+[ext_resource type="Script" path="res://part02/settings_notice2.gd" id="1_4dug7"]
 [ext_resource type="PackedScene" uid="uid://c7kjke7mmdjoa" path="res://part01/world.tscn" id="1_ep64y"]
 [ext_resource type="Script" path="res://part01/camera_rig.gd" id="2_chchu"]
 [ext_resource type="Script" path="res://part02/camera_3d_texel_snapped2.gd" id="3_vgh83"]
@@ -13,6 +14,7 @@ shader = ExtResource("5_flve1")
 viewport_path = NodePath("SubViewport")
 
 [node name="Part02" type="Node3D"]
+script = ExtResource("1_4dug7")
 
 [node name="World" parent="." instance=ExtResource("1_ep64y")]
 
