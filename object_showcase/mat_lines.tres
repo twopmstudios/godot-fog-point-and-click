@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bfwlg1lwsat8r"]
+
+[ext_resource type="Shader" path="res://object_showcase/outline_and_edge.gdshader" id="1_up6im"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_up6im")
+shader_parameter/albedo = Color(0.75, 0.75, 0.75, 1)
+shader_parameter/outline_color = Color(0.27, 0.1566, 0.26433, 1)
+shader_parameter/edge_color = Color(0.25, 0.145, 0.145, 1)
+shader_parameter/depth_threshold = 0.25
+shader_parameter/depth_normal_threshold = 0.5
+shader_parameter/depth_normal_threshold_scale = 2.0
+shader_parameter/convex_threshold = 0.5
+shader_parameter/convex_normal_threshold = 1.0
+shader_parameter/convex_normal_threshold_scale = 0.0

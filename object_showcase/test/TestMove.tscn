@@ -1,0 +1,102 @@
+[gd_scene load_steps=12 format=3 uid="uid://dqgiyvlaqa17y"]
+
+[ext_resource type="Script" path="res://ClickToMove.gd" id="1_fcvan"]
+[ext_resource type="Material" uid="uid://bfwlg1lwsat8r" path="res://object_showcase/mat_lines.tres" id="2_a12ol"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_hif2c"]
+vertices = PackedVector3Array(9.55611, 0.0271594, -0.112995, 9.55611, 0.0271594, -10.113, 0.0561085, 0.0271594, -10.113, -9.44389, 0.0271594, -0.112995, -9.44389, 0.0271594, 10.137, 0.0561085, 0.0271594, 10.137, 0.0561085, 0.0271594, -10.113, -9.44389, 0.0271594, -10.113, -9.44389, 0.0271594, -0.112995, 0.0561085, 0.0271594, 10.137, 9.55611, 0.0271594, 10.137, 9.55611, 0.0271594, -0.112995)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 5), PackedInt32Array(3, 5, 4), PackedInt32Array(8, 7, 6), PackedInt32Array(11, 10, 9)]
+cell_height = 0.01
+
+[sub_resource type="BoxMesh" id="BoxMesh_q8a4c"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vvx0g"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_18hyh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_6lim0"]
+material = ExtResource("2_a12ol")
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v8pv1"]
+material = ExtResource("2_a12ol")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gemmb"]
+
+[sub_resource type="Sky" id="Sky_6xbsx"]
+sky_material = SubResource("ProceduralSkyMaterial_gemmb")
+
+[sub_resource type="Environment" id="Environment_re82b"]
+background_mode = 2
+sky = SubResource("Sky_6xbsx")
+
+[node name="Node3D" type="Node3D"]
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+visible = false
+navigation_mesh = SubResource("NavigationMesh_hif2c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D"]
+transform = Transform3D(19.8878, 0, 0, 0, 0.0256813, 0, 0, 0, 21.226, 0, 0, 0)
+mesh = SubResource("BoxMesh_q8a4c")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="NavigationRegion3D/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/MeshInstance3D/StaticBody3D"]
+shape = SubResource("BoxShape3D_vvx0g")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+script = ExtResource("1_fcvan")
+bob_amplitude = 0.05
+bob_frequency = 36.0
+wobble_frequency = 18.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12774, 0)
+shape = SubResource("CapsuleShape3D_18hyh")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="CharacterBody3D"]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+
+[node name="Visual" type="Node3D" parent="CharacterBody3D"]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="CharacterBody3D/Visual"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.40339, -0.457462)
+visible = false
+light_color = Color(0.883107, 0.802894, 0.667877, 1)
+light_energy = 0.1
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="CharacterBody3D/Visual"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.183, 0)
+light_color = Color(0.747967, 0.545666, 0.465949, 1)
+light_energy = 0.4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D/Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.12328, 0)
+mesh = SubResource("CapsuleMesh_6lim0")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="CharacterBody3D/Visual"]
+transform = Transform3D(-4.37113e-09, -3.10351e-09, -0.088, -0.1, -3.10351e-09, 3.8466e-09, -4.37114e-09, 0.071, -3.8466e-09, 0.00455786, 2.31129, -0.316594)
+mesh = SubResource("CapsuleMesh_v8pv1")
+skeleton = NodePath("../..")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="CharacterBody3D/Visual"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.31863, 0)
+material_override = ExtResource("2_a12ol")
+radius = 0.3
+
+[node name="Camera3D" type="Camera3D" parent="." groups=["Camera"]]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, 0, 7.92028, 13.1512)
+visible = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_re82b")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10.7235, -4.68739e-07)
+visible = false
+light_color = Color(0.91461, 0.696862, 0.650521, 1)
+light_energy = 6.636
+spot_range = 53.039
+spot_angle = 66.0938
