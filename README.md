@@ -1,3 +1,8 @@
+https://github.com/user-attachments/assets/48283816-ba20-40c9-b3ce-004c852ff876
+
+
+Fork from https://git.sr.ht/~denovodavid/3d-pixel-art-in-godot, original README:
+
 # 3D Pixel Art in Godot
 
 Supplemental source projects for the 3D Pixel Art YouTube series.
